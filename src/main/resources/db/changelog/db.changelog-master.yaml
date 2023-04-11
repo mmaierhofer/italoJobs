@@ -1,12 +1,10 @@
 databaseChangeLog:
-  -  preConditions:
-
   -  changeSet:
        id:  1
        author:  mmaierhofer
        changes:
          -  createTable:
-              tableName:  user
+              tableName:  users
               columns:
                 -  column:
                      name:  id
@@ -26,3 +24,40 @@ databaseChangeLog:
                 -  column:
                      name:  email
                      type:  varchar(255)
+                -  column:
+                     name: password
+                     type: varchar(30)
+
+  - changeSet:
+      id: 2
+      author: mmaierhofer
+      changes:
+        - createTable:
+            tableName: persons
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: bigint
+
+  - changeSet:
+      id: 3
+      author: liquibase-docs
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: persons
+            constraintName: fk_person_user
+            deferrable: true
+            initiallyDeferred: true
+            onDelete: CASCADE
+            onUpdate: RESTRICT
+            referencedColumnNames: id
+            referencedTableName: users
+            validate: true
