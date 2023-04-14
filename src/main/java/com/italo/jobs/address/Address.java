@@ -1,6 +1,6 @@
 package com.italo.jobs.address;
 
-import com.italo.jobs.country.Country;
+import com.italo.jobs.enums.Country;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

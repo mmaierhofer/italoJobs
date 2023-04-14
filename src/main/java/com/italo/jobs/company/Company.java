@@ -1,7 +1,7 @@
 package com.italo.jobs.company;
 
 import com.italo.jobs.address.Address;
-import com.italo.jobs.industry.Industry;
+import com.italo.jobs.enums.Industry;
 import com.italo.jobs.job.Job;
 import com.italo.jobs.user.User;
 import jakarta.persistence.*;
@@ -34,4 +34,6 @@ public class Company {
     private User connectedUser;
     @OneToMany(mappedBy = "company_id")
     private Set<Job> jobs;
+    @Column(name = "numEmployees")
+    private Long numEmployees;
 }

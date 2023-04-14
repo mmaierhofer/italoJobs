@@ -1,4 +1,4 @@
-package com.italo.jobs.country;
+package com.italo.jobs.enums;
 
 public enum Country {
     Germany, Austria

@@ -1,6 +1,7 @@
 package com.italo.jobs.job;
 
 import com.italo.jobs.company.Company;
+import com.italo.jobs.skill.Skill;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,7 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -25,6 +26,15 @@ public class Job {
     private String occupation;
     @Column(name = "start_date")
     private LocalDate startDate;
+    @Column(name = "description")
+    private String description;
+    @ManyToMany
+    @JoinTable(
+            name = "job_skill",
+            joinColumns = { @JoinColumn(name = "id", table = "job") },
+            inverseJoinColumns = { @JoinColumn(name = "id", table = "skill") }
+    )
+    private List<Skill> skills;
     @ManyToOne
     @JoinColumn(name = "company_id", referencedColumnName = "id")
     Company company;

@@ -1,6 +1,7 @@
 package com.italo.jobs.person;
 
 import com.italo.jobs.company.Company;
+import com.italo.jobs.enums.Status;
 import com.italo.jobs.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Getter
@@ -32,6 +34,14 @@ public class Person{
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
+
+    @Column(name = "birthdate")
+    private LocalDateTime birthdate;
+
+    @Column(name = "status")
+    private Status status;
+
+
 
 
 }
