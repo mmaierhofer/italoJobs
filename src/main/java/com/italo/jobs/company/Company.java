@@ -32,7 +32,7 @@ public class Company {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User connectedUser;
-    @OneToMany(mappedBy = "company_id")
+    @OneToMany(mappedBy = "company")
     private Set<Job> jobs;
     @Column(name = "numEmployees")
     private Long numEmployees;

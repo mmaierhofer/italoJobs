@@ -31,11 +31,12 @@ public class Job {
     @ManyToMany
     @JoinTable(
             name = "job_skill",
-            joinColumns = { @JoinColumn(name = "id", table = "job") },
-            inverseJoinColumns = { @JoinColumn(name = "id", table = "skill") }
+            joinColumns = { @JoinColumn(name = "job_id", table = "job", referencedColumnName = "id") },
+            inverseJoinColumns = { @JoinColumn(name = "skill_id", table = "skill", referencedColumnName = "id") }
     )
     private List<Skill> skills;
     @ManyToOne
     @JoinColumn(name = "company_id", referencedColumnName = "id")
     Company company;
+
 }

@@ -61,3 +61,189 @@ databaseChangeLog:
             referencedColumnNames: id
             referencedTableName: users
             validate: true
+
+  - changeSet:
+      id: 4
+      author: mmaierhofer
+      changes:
+        - createTable:
+            tableName: addresses
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: country
+                  type: bigint
+              - column:
+                  name: street_and_number
+                  type: varchar(255)
+              - column:
+                  name: additional_info
+                  type: varchar(255)
+
+  - changeSet:
+      id: 7
+      author: mmaierhofer
+      changes:
+        - createTable:
+            tableName: jobs
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: title
+                  type: varchar(255)
+              - column:
+                  name: occupation
+                  type: varchar(255)
+              - column:
+                  name: start_date
+                  type: timestamp
+              - column:
+                  name: description
+                  type: text
+              - column:
+                  name: company_id
+                  type: bigint
+
+  - changeSet:
+      id: 8
+      author: mmaierhofer
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: company_id
+            baseTableName: jobs
+            constraintName: fk_jobs_companies
+            deferrable: true
+            initiallyDeferred: true
+            onDelete: CASCADE
+            onUpdate: RESTRICT
+            referencedColumnNames: id
+            referencedTableName: companies
+            validate: true
+
+  - changeSet:
+      id: 5
+      author: mmaierhofer
+      changes:
+        - createTable:
+            tableName: companies
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(50)
+              - column:
+                  name: address_id
+                  type: bigint
+              - column:
+                  name: industry
+                  type: bigint
+              - column:
+                  name: user_id
+                  type: bigint
+              - column:
+                  name: num_employees
+                  type: int
+
+  - changeSet:
+      id: 6
+      author: mmaierhofer
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: address_id
+            baseTableName: companies
+            constraintName: fk_company_address
+            deferrable: true
+            initiallyDeferred: true
+            onDelete: CASCADE
+            onUpdate: RESTRICT
+            referencedColumnNames: id
+            referencedTableName: addresses
+            validate: true
+
+
+  - changeSet:
+      id: 9
+      author: mmaierhofer
+      changes:
+        - createTable:
+            tableName: skills
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: title
+                  type: varchar(255)
+              - column:
+                  name: industry
+                  type: bigint
+
+  - changeSet:
+      id: 10
+      author: mmaierhofer
+      changes:
+        - createTable:
+            tableName: job_skill
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: job_id
+                  type: bigint
+              - column:
+                  name: skill_id
+                  type: bigint
+
+  - changeSet:
+      id: 11
+      author: mmaierhofer
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: job_id
+            baseTableName: job_skill
+            constraintName: fk_jobs_skill_job
+            deferrable: true
+            initiallyDeferred: true
+            onDelete: CASCADE
+            onUpdate: RESTRICT
+            referencedColumnNames: id
+            referencedTableName: jobs
+            validate: true
+        - addForeignKeyConstraint:
+            baseColumnNames: skill_id
+            baseTableName: job_skill
+            constraintName: fk_job_skill_skill
+            deferrable: true
+            initiallyDeferred: true
+            onDelete: CASCADE
+            onUpdate: RESTRICT
+            referencedColumnNames: id
+            referencedTableName: skills
+            validate: true

@@ -23,13 +23,13 @@ public class Person{
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @ManyToMany
+    /*@ManyToMany
     @JoinTable(
-            name = "person_favority_company",
+            name = "person_favorite_company",
             joinColumns = { @JoinColumn(name = "id", table = "company") },
             inverseJoinColumns = { @JoinColumn(name = "id", table = "person") }
     )
-    private Set<Company> favoriteCompanies;
+    private Set<Company> favoriteCompanies;*/
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
